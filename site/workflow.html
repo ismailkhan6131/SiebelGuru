@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Ismail — Senior Siebel Developer">
+  <title>Workflow - SiebelGuru</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="logo.svg" alt="SiebelGuru logo">
+      <a class="site-title" href="index.html">SiebelGuru</a>
+    </div>
+    <button class="menu-toggle" aria-label="menu" style="display:none">☰</button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="siebel-configuration.html">Configuration</a>
+      <a href="scripting.html">Scripting</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="integration.html">Integration</a>
+      <a href="openui.html">Open UI</a>
+      <a href="search.html">Search</a>
+    </nav>
+    <button class="theme-toggle" title="Toggle theme">Theme</button>
+  </header>
+  <main>
+    <h2>⚡ Workflow Guide</h2>
+    <p>Automate business processes with workflows. Design processes, triggers, conditions, and actions to streamline operations.</p>
+
+    <!-- ===== WORKFLOW BASICS ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">🔄</div>
+        <div>
+          <h3 class="post-title">Workflow Fundamentals</h3>
+          <p class="post-desc">Automation and process design</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>Workflows (Processes) automate business tasks by executing a series of steps based on conditions and triggers.</p>
+
+        <h4>💡 Workflow Components</h4>
+        <ul>
+          <li><strong>Trigger:</strong> Event that starts the workflow (record created, field updated)</li>
+          <li><strong>Condition:</strong> Logic that determines which steps execute</li>
+          <li><strong>Action:</strong> What the workflow does (send email, update record, call service)</li>
+          <li><strong>Step:</strong> Individual operation in the process</li>
+          <li><strong>Subprocess:</strong> Reusable workflow called from another workflow</li>
+        </ul>
+
+        <h4>🔔 Common Workflow Triggers</h4>
+        <div class="code-example">
+          <pre>
+RECORD_CREATE     → When new record inserted
+RECORD_UPDATE     → When record modified
+FIELD_UPDATE      → When specific field changes
+RECORD_DELETE     → When record deleted
+TIME_BASED        → At scheduled time
+EXTERNAL_EVENT    → From external system
+MANUAL            → User manually triggers
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROCESS DESIGN ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">📐</div>
+        <div>
+          <h3 class="post-title">Process Design</h3>
+          <p class="post-desc">Building effective workflows</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <h4>🛠️ Creating a Basic Process</h4>
+        <div class="code-example">
+          <pre>
+Step 1: Open Siebel Tools → Workflow Design
+Step 2: Process → New
+Step 3: Enter Process Name (e.g., "Account Notification")
+Step 4: Select Trigger Object & Event
+Step 5: Add Start Node
+Step 6: Add Decision/Condition Nodes
+Step 7: Add Action Steps:
+        ├─ Send Email
+        ├─ Update Record
+        ├─ Create Task
+        └─ Invoke Business Service
+Step 8: Add Error Handling
+Step 9: Map variables and outputs
+Step 10: Test and Activate
+          </pre>
+        </div>
+
+        <h4>📊 Example: Lead Notification Workflow</h4>
+        <div class="code-example">
+          <pre>
+Trigger: Lead.Status = "Qualified"
+
+Decision: Lead.Budget >= 100000?
+├─ YES:
+│   ├─ Create Task for Manager
+│   ├─ Send Email to Sales Director
+│   └─ Set Priority = High
+└─ NO:
+    ├─ Create Task for Sales Rep
+    └─ Set Priority = Normal
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WORKFLOW ACTIONS ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">✋</div>
+        <div>
+          <h3 class="post-title">Workflow Actions</h3>
+          <p class="post-desc">Operations that workflows perform</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <h4>📧 Email Actions</h4>
+        <ul>
+          <li><strong>Send Email:</strong> Send email to user or dynamic recipient</li>
+          <li><strong>Email Template:</strong> Use predefined email template</li>
+          <li><strong>Attachments:</strong> Include document attachments</li>
+          <li><strong>CC/BCC:</strong> Add additional recipients</li>
+        </ul>
+
+        <h4>📝 Record Actions</h4>
+        <ul>
+          <li><strong>Create Record:</strong> Insert new record in database</li>
+          <li><strong>Update Record:</strong> Modify field values</li>
+          <li><strong>Delete Record:</strong> Remove record from database</li>
+          <li><strong>Query Records:</strong> Search for matching records</li>
+        </ul>
+
+        <h4>⚙️ Service Actions</h4>
+        <ul>
+          <li><strong>Invoke Business Service:</strong> Call custom service</li>
+          <li><strong>Integration Service:</strong> Call external system</li>
+          <li><strong>Subprocess:</strong> Call another workflow</li>
+          <li><strong>Script:</strong> Execute code directly</li>
+        </ul>
+
+        <h4>🛠️ Invoking a Business Service</h4>
+        <div class="code-example">
+          <pre>
+Step 1: Add "Invoke Business Service" step
+Step 2: Select Service Name (e.g., "SendEmailService")
+Step 3: Select Method (e.g., "SendEmail")
+Step 4: Map Input:
+        └─ EmailAddress → [Account.Email]
+        └─ Subject → "Order Confirmation"
+        └─ Body → "Your order has been received"
+
+Step 5: Map Output:
+        └─ Success → [Local.Result]
+        └─ ErrorMsg → [Local.ErrorMsg]
+
+Step 6: Add Decision based on Success
+        ├─ Continue if Success = Yes
+        └─ Log error if Failed
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BEST PRACTICES ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">⭐</div>
+        <div>
+          <h3 class="post-title">Workflow Best Practices</h3>
+          <p class="post-desc">Design patterns and optimization</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <h4>✅ Design Best Practices</h4>
+        <ul>
+          <li>✅ Keep workflows simple and focused (one responsibility per process)</li>
+          <li>✅ Use subprocesses for reusable logic</li>
+          <li>✅ Make decision logic clear and well-documented</li>
+          <li>✅ Test with sample data before activation</li>
+          <li>✅ Add error handling for all external calls</li>
+          <li>✅ Use version control for workflow definitions</li>
+          <li>❌ Avoid deeply nested conditions (hard to read)</li>
+          <li>❌ Don't process large record sets synchronously</li>
+        </ul>
+
+        <h4>⚡ Performance Tips</h4>
+        <ul>
+          <li>✅ Use subprocess calls to break up large workflows</li>
+          <li>✅ Limit query results with specific search specs</li>
+          <li>✅ Schedule heavy operations during off-hours</li>
+          <li>✅ Use async processing for long-running tasks</li>
+          <li>❌ Avoid loops over large datasets</li>
+        </ul>
+
+        <h4>🔐 Security Considerations</h4>
+        <ul>
+          <li>✅ Validate all input data</li>
+          <li>✅ Use access control on sensitive operations</li>
+          <li>✅ Audit sensitive actions (delete, mass update)</li>
+          <li>✅ Encrypt passwords in service configuration</li>
+          <li>✅ Log all workflow executions</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+    <a href="index.html">Back</a>
+    <p>Author: Ismail — Senior Siebel Developer</p>
+  </footer>
+  <script src="ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Ismail — Senior Siebel Developer">
+  <title>SiebelGuru</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="logo.svg" alt="SiebelGuru logo">
+      <a class="site-title" href="index.html">SiebelGuru</a>
+    </div>
+    <button class="menu-toggle" aria-label="menu" style="display:none">☰</button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="siebel-configuration.html">Configuration</a>
+      <a href="scripting.html">Scripting</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="integration.html">Integration</a>
+      <a href="openui.html">Open UI</a>
+      <a href="search.html">Search</a>
+    </nav>
+    <button class="theme-toggle" title="Toggle theme">Theme</button>
+  </header>
+
+  <main>
+    <section>
+      <h2>Welcome to SiebelGuru</h2>
+      <p>Your comprehensive resource for Siebel CRM development, configuration, and best practices. Practical guides, code examples, and expert tips for developers and administrators.</p>
+    </section>
+
+    <!-- AI Chatbot Section -->
+    <section>
+      <h3>🤖 AI Assistant</h3>
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">💬</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Get Instant Help with Siebel Chatbot</h4>
+            <p class="post-desc" style="margin:4px 0 0 0">Ask questions about Siebel development and get AI-powered answers</p>
+          </div>
+        </div>
+        <div class="post-content">
+          <p>Get instant answers to your Siebel questions using our AI-powered chatbot. Ask about configuration, scripting, workflows, integration, Open UI, and more!</p>
+          <p style="font-size: 0.95rem; color: #6b7280; margin: 12px 0;">The chatbot is trained on Siebel best practices and can help with:</p>
+          <ul style="font-size: 0.95rem;">
+            <li>Configuration troubleshooting</li>
+            <li>Code examples and patterns</li>
+            <li>Performance optimization</li>
+            <li>Integration strategies</li>
+            <li>Open UI customization</li>
+          </ul>
+          <button class="btn" onclick="openChatbot()" style="margin-top: 12px;">Open Chatbot</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Topics -->
+    <section>
+      <h3>📚 Featured Topics</h3>
+      <ul>
+        <li><a href="siebel-configuration.html">Siebel Configuration</a> — Business Components, Objects, Views, Applets, Fields, and more</li>
+        <li><a href="scripting.html">Scripting Guide</a> — Browser/Server scripts, Business Services, and patterns</li>
+        <li><a href="workflow.html">Workflow & Processes</a> — Process design, triggers, actions, and automation</li>
+        <li><a href="integration.html">Integration Guide</a> — EAI, SOAP/REST APIs, File adapters, and synchronization</li>
+        <li><a href="openui.html">Open UI Development</a> — Custom controls, CSS styling, and responsive design</li>
+      </ul>
+    </section>
+
+    <!-- Quick Start -->
+    <section>
+      <h3>🚀 Quick Start Guide</h3>
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">🏗️</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Getting Started with Siebel Development</h4>
+          </div>
+        </div>
+        <div class="post-content">
+          <p><strong>Step 1: Understand the Architecture</strong></p>
+          <ul>
+            <li>Learn Business Components (BC) and Business Objects (BO)</li>
+            <li>Explore Views, Applets, and Screens</li>
+            <li>Understand the repository structure and metadata</li>
+          </ul>
+          <p><strong>Step 2: Master Configuration</strong></p>
+          <ul>
+            <li>Create custom Business Components</li>
+            <li>Configure Fields with validation rules</li>
+            <li>Design Views and Applets for user interface</li>
+            <li>Set up Search Specifications and Indexes</li>
+          </ul>
+          <p><strong>Step 3: Write Effective Scripts</strong></p>
+          <ul>
+            <li>Browser Scripts for client-side logic</li>
+            <li>Server Scripts for data validation</li>
+            <li>Business Services for reusable functionality</li>
+          </ul>
+          <p><strong>Step 4: Automate with Workflows</strong></p>
+          <ul>
+            <li>Design Processes with conditions and actions</li>
+            <li>Trigger workflows on business events</li>
+            <li>Integrate external systems</li>
+          </ul>
+          <p><strong>Step 5: Build Modern UIs</strong></p>
+          <ul>
+            <li>Customize with Open UI controls</li>
+            <li>Create responsive designs</li>
+            <li>Enhance user experience with JavaScript</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Concepts -->
+    <section>
+      <h3>💡 Core Concepts</h3>
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">🔑</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Essential Siebel Concepts</h4>
+          </div>
+        </div>
+        <div class="post-content">
+          <h4>Business Components (BC)</h4>
+          <p>Basic building blocks that represent business entities. Define fields, validation, and relationships to database tables.</p>
+          
+          <h4>Business Objects (BO)</h4>
+          <p>Collections of Business Components that represent complex business entities and their relationships.</p>
+          
+          <h4>Views & Applets</h4>
+          <p>Views organize information on screens. Applets are controls within views that display and edit data.</p>
+          
+          <h4>Scripting</h4>
+          <p>eScript/JavaScript code runs at browser (client) or server level to implement custom business logic.</p>
+          
+          <h4>Workflows (Processes)</h4>
+          <p>Automate business processes by defining steps, conditions, and actions triggered by business events.</p>
+          
+          <h4>Integration</h4>
+          <p>Connect Siebel with external systems via EAI, REST/SOAP APIs, or file-based adapters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Practices -->
+    <section>
+      <h3>✅ Development Best Practices</h3>
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">⭐</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Tips for Successful Siebel Development</h4>
+          </div>
+        </div>
+        <div class="post-content">
+          <h4>Configuration</h4>
+          <ul>
+            <li>✅ Use meaningful names for components and fields</li>
+            <li>✅ Document all custom configurations</li>
+            <li>✅ Version control your repository</li>
+            <li>❌ Don't modify Siebel-delivered objects directly</li>
+          </ul>
+          
+          <h4>Scripting</h4>
+          <ul>
+            <li>✅ Keep scripts small and focused</li>
+            <li>✅ Use Business Services for reusable logic</li>
+            <li>✅ Implement error handling properly</li>
+            <li>✅ Test thoroughly before deployment</li>
+            <li>❌ Avoid complex nested logic</li>
+            <li>❌ Don't hardcode values; use configuration</li>
+          </ul>
+          
+          <h4>Performance</h4>
+          <ul>
+            <li>✅ Use proper Search Specs to limit queries</li>
+            <li>✅ Index frequently searched fields</li>
+            <li>✅ Implement pagination for large datasets</li>
+            <li>✅ Monitor and optimize long-running processes</li>
+            <li>❌ Don't fetch all records unnecessarily</li>
+          </ul>
+          
+          <h4>Security</h4>
+          <ul>
+            <li>✅ Use Access Control Lists (ACL)</li>
+            <li>✅ Validate all user input</li>
+            <li>✅ Encrypt sensitive data</li>
+            <li>✅ Audit critical operations</li>
+            <li>❌ Never hardcode credentials</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Tasks -->
+    <section>
+      <h3>🛠️ Common Development Tasks</h3>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Configuration Topics</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Scripting Types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Code Examples</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Integration Methods</div>
+        </div>
+      </div>
+      
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">🎯</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Frequently Asked Tasks</h4>
+          </div>
+        </div>
+        <div class="post-content">
+          <p><strong>How do I create a custom field?</strong></p>
+          <p>See <a href="siebel-configuration.html">Configuration Guide</a> → Field Properties section for detailed steps.</p>
+          
+          <p><strong>How do I validate data on save?</strong></p>
+          <p>Use Server Scripts with PreWrite event. See <a href="scripting.html">Scripting Guide</a> → Server Scripts.</p>
+          
+          <p><strong>How do I automate a business process?</strong></p>
+          <p>Create a Process with triggers and actions. See <a href="workflow.html">Workflow Guide</a> for complete examples.</p>
+          
+          <p><strong>How do I integrate with external systems?</strong></p>
+          <p>Use REST APIs, SOAP, or EAI. See <a href="integration.html">Integration Guide</a> for patterns and code.</p>
+          
+          <p><strong>How do I customize the user interface?</strong></p>
+          <p>Create custom Open UI controls. See <a href="openui.html">Open UI Guide</a> for control development patterns.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section>
+      <h3>📖 Resources & Tools</h3>
+      <div class="post">
+        <div class="post-header">
+          <div class="post-icon">🔧</div>
+          <div>
+            <h4 class="post-title" style="margin:0">Essential Tools & Resources</h4>
+          </div>
+        </div>
+        <div class="post-content">
+          <h4>Development Tools</h4>
+          <ul>
+            <li><strong>Siebel Tools:</strong> Repository design and configuration</li>
+            <li><strong>Siebel Web Client:</strong> User interface testing and validation</li>
+            <li><strong>Browser DevTools:</strong> Debugging JavaScript and CSS</li>
+            <li><strong>Postman:</strong> Testing REST/SOAP APIs</li>
+            <li><strong>Git/SVN:</strong> Version control for customizations</li>
+          </ul>
+          
+          <h4>Documentation</h4>
+          <ul>
+            <li>Siebel System Administration Guide</li>
+            <li>Siebel Developer's Reference</li>
+            <li>eScript Language Reference</li>
+            <li>Open UI Developer's Guide</li>
+            <li>EAI Integration Handbook</li>
+          </ul>
+          
+          <h4>Learning Path</h4>
+          <ul>
+            <li>1. Start with <a href="siebel-configuration.html">Configuration</a> basics</li>
+            <li>2. Learn <a href="scripting.html">Scripting</a> fundamentals</li>
+            <li>3. Master <a href="workflow.html">Workflow</a> automation</li>
+            <li>4. Explore <a href="integration.html">Integration</a> patterns</li>
+            <li>5. Build UIs with <a href="openui.html">Open UI</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section>
+      <h3>🔍 Need Help?</h3>
+      <p>Use the <a href="search.html">Search</a> feature to find specific topics, code examples, and best practices across all guides.</p>
+      <p style="font-size: 0.95rem; color: #6b7280; margin-top: 16px;">Last updated: February 2026 | Author: Ismail — Senior Siebel Developer</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <p>© 2026 SiebelGuru | Practical Siebel Development Resources</p>
+      <p style="font-size: 0.9rem; color: #6b7280;">Configuration • Scripting • Workflow • Integration • Open UI</p>
+    </div>
+    <p>Author: Ismail — Senior Siebel Developer</p>
+  </footer>
+  <script src="ui.js"></script>
+  <script>
+    function openChatbot() {
+      // Open chatbot in a new window
+      window.open('http://localhost:3000', 'SiebelGuru Chatbot', 'width=600,height=700,resizable=yes,scrollbars=yes');
+    }
+  </script>
+</body>
+</html>

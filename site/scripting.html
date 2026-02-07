@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Ismail — Senior Siebel Developer">
+  <title>Scripting - SiebelGuru</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="logo.svg" alt="SiebelGuru logo">
+      <a class="site-title" href="index.html">SiebelGuru</a>
+    </div>
+    <button class="menu-toggle" aria-label="menu" style="display:none">☰</button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="siebel-configuration.html">Configuration</a>
+      <a href="scripting.html">Scripting</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="integration.html">Integration</a>
+      <a href="openui.html">Open UI</a>
+      <a href="search.html">Search</a>
+    </nav>
+    <button class="theme-toggle" title="Toggle theme">Theme</button>
+  </header>
+  <main>
+    <h2>💻 Scripting Guide</h2>
+    <p>Master Siebel scripting to automate business logic, validate data, and customize application behavior. Learn Browser Scripts, Server Scripts, and Business Services.</p>
+
+    <!-- ===== BROWSER SCRIPTS ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">🌐</div>
+        <div>
+          <h3 class="post-title">Browser Scripts</h3>
+          <p class="post-desc">Client-side logic in the user interface</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>Browser Scripts execute on the client-side (web browser) and run in response to user actions or UI events.</p>
+
+        <h4>💡 Browser Script Events</h4>
+        <ul>
+          <li><strong>BusComp_PreInvokeMethod:</strong> Before method execution</li>
+          <li><strong>BusComp_PostInvokeMethod:</strong> After method execution</li>
+          <li><strong>BusComp_PreSetFieldValue:</strong> Before field update</li>
+          <li><strong>BusComp_PostSetFieldValue:</strong> After field update</li>
+          <li><strong>Applet_Load:</strong> When applet loads</li>
+          <li><strong>Applet_PreInvokeMethod:</strong> Before applet method</li>
+        </ul>
+
+        <h4>🛠️ Simple Browser Script Example (eScript)</h4>
+        <div class="code-example">
+          <pre>
+function BusComp_PreInvokeMethod (methodName)
+{
+  if (methodName == "DoSomething") {
+    // Get the current business object
+    var boAccount = TheApplication()
+      .GetBusObject("Account");
+    var bcAccount = boAccount.GetBusComp("Account");
+    
+    // Add validation logic
+    var accountName = bcAccount.GetFieldValue("Name");
+    if (accountName == "") {
+      TheApplication().RaiseErrorText(
+        "Error: Account name cannot be empty"
+      );
+      return (ContinueOperation);
+    }
+    
+    return (ContinueOperation);
+  }
+}
+          </pre>
+        </div>
+
+        <h4>📋 Best Practices for Browser Scripts</h4>
+        <ul>
+          <li>✅ Keep scripts small and focused</li>
+          <li>✅ Use error handling with try-catch</li>
+          <li>✅ Minimize DOM manipulation</li>
+          <li>✅ Cache object references</li>
+          <li>❌ Avoid long-running operations</li>
+          <li>❌ Don't modify other applets directly</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== SERVER SCRIPTS ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">🖥️</div>
+        <div>
+          <h3 class="post-title">Server Scripts</h3>
+          <p class="post-desc">Server-side business logic and data operations</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>Server Scripts execute on the Siebel server and handle data operations, validations, and complex business logic.</p>
+
+        <h4>💡 Server Script Events</h4>
+        <ul>
+          <li><strong>PreWrite:</strong> Before record save</li>
+          <li><strong>PostWrite:</strong> After record save</li>
+          <li><strong>PreQuery:</strong> Before database query</li>
+          <li><strong>PostQuery:</strong> After database query</li>
+          <li><strong>PreDelete:</strong> Before record delete</li>
+          <li><strong>PostDelete:</strong> After record delete</li>
+          <li><strong>FieldChange:</strong> When specific field changes</li>
+        </ul>
+
+        <h4>🛠️ Server Script Example</h4>
+        <div class="code-example">
+          <pre>
+function BusComp_PreWrite (WriteType)
+{
+  // Validate data before saving
+  var accountName = this.GetFieldValue("Name");
+  var accountStatus = this.GetFieldValue("Status");
+  
+  // Check if account name is provided
+  if (accountName == "" || accountName == null) {
+    throw new Error(
+      "Account name is required"
+    );
+  }
+  
+  // Auto-populate MODIFIED_BY field
+  this.SetFieldValue(
+    "Modified_By", 
+    TheApplication().GetLoginName()
+  );
+  
+  return (ContinueOperation);
+}
+          </pre>
+        </div>
+
+        <h4>📊 PreWrite vs PostWrite</h4>
+        <ul>
+          <li><strong>PreWrite:</strong> Validate, transform data BEFORE saving. Can reject changes.</li>
+          <li><strong>PostWrite:</strong> Execute AFTER data saved. Good for logging, triggering workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== BUSINESS SERVICES ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">⚙️</div>
+        <div>
+          <h3 class="post-title">Business Services</h3>
+          <p class="post-desc">Reusable server-side components</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>Business Services are reusable components that encapsulate business logic and can be called from scripts, workflows, or other services.</p>
+
+        <h4>💡 Business Service Types</h4>
+        <ul>
+          <li><strong>Service Script:</strong> Custom eScript/VB logic</li>
+          <li><strong>Business Service Simulation:</strong> Mock for testing</li>
+          <li><strong>External Service:</strong> Calls external systems</li>
+          <li><strong>Siebel Service:</strong> Built-in Siebel services</li>
+        </ul>
+
+        <h4>🛠️ Creating & Calling a Business Service</h4>
+        <div class="code-example">
+          <pre>
+// Define a Business Service in Tools
+// Name: SendEmailService
+// Input: EmailAddress, Subject, Body
+// Output: Success, ErrorMsg
+
+// Call Business Service from Script:
+var inputs = TheApplication()
+  .NewPropertySet();
+inputs.SetProperty("EmailAddress", "user@example.com");
+inputs.SetProperty("Subject", "Welcome");
+inputs.SetProperty("Body", "Welcome to our system");
+
+var outputs = TheApplication()
+  .GetService("SendEmailService")
+  .InvokeMethod("SendEmail", inputs);
+
+if (outputs.GetProperty("Success") == "Y") {
+  TheApplication().RaiseInfoText("Email sent");
+} else {
+  TheApplication().RaiseErrorText(
+    outputs.GetProperty("ErrorMsg")
+  );
+}
+          </pre>
+        </div>
+
+        <h4>✅ Business Service Best Practices</h4>
+        <ul>
+          <li>✅ Make services stateless and reusable</li>
+          <li>✅ Use PropertySets for input/output</li>
+          <li>✅ Add comprehensive error handling</li>
+          <li>✅ Document inputs and outputs</li>
+          <li>✅ Log important operations</li>
+          <li>❌ Avoid tight coupling with specific BCs</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== COMMON SCRIPTING PATTERNS ===== -->
+    <div class="post">
+      <div class="post-header">
+        <div class="post-icon">📝</div>
+        <div>
+          <h3 class="post-title">Common Scripting Patterns</h3>
+          <p class="post-desc">Proven techniques and best practices</p>
+        </div>
+      </div>
+      <div class="post-content">
+        <h4>🔍 Pattern 1: Field Validation</h4>
+        <div class="code-example">
+          <pre>
+function BusComp_PreWrite (WriteType)
+{
+  var email = this.GetFieldValue("Email");
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (email && !emailRegex.test(email)) {
+    throw new Error("Invalid email format");
+  }
+  
+  return (ContinueOperation);
+}
+          </pre>
+        </div>
+
+        <h4>📝 Pattern 2: Cascading Updates</h4>
+        <div class="code-example">
+          <pre>
+function BusComp_PostWrite (WriteType)
+{
+  // After Account status changes, update related records
+  if (this.GetFieldValue("Status") == "Inactive") {
+    var boContact = TheApplication()
+      .GetBusObject("Contact");
+    var bcContact = boContact.GetBusComp("Contact");
+    
+    // Find all contacts for this account
+    var spec = "[Account_ID] = '" 
+      + this.GetFieldValue("Row_ID") + "'";
+    bcContact.ExecuteQuery(spec);
+    
+    // Update each contact
+    while (bcContact.FirstRecord()) {
+      bcContact.SetFieldValue("Status", "Inactive");
+      bcContact.WriteRecord();
+      bcContact.DeleteRecord();
+    }
+  }
+  
+  return (ContinueOperation);
+}
+          </pre>
+        </div>
+
+        <h4>🔐 Pattern 3: Error Handling</h4>
+        <div class="code-example">
+          <pre>
+function BusComp_PreWrite (WriteType)
+{
+  try {
+    var accountId = this.GetFieldValue("Account_ID");
+    if (!accountId) {
+      throw new Error("Account ID is required");
+    }
+    
+    // Validate account exists
+    var boAccount = TheApplication()
+      .GetBusObject("Account");
+    var bcAccount = boAccount.GetBusComp("Account");
+    
+    bcAccount.ActivateField("Row_ID");
+    bcAccount.ClearToQuery();
+    bcAccount.SetSearchSpec(
+      "Row_ID", accountId
+    );
+    bcAccount.ExecuteQuery(ForReadOnly);
+    
+    if (!bcAccount.FirstRecord()) {
+      throw new Error("Account not found");
+    }
+    
+    return (ContinueOperation);
+  } catch (e) {
+    TheApplication().RaiseErrorText(
+      "Error: " + e.message
+    );
+    return (CancelOperation);
+  }
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+    <a href="index.html">Back</a>
+    <p>Author: Ismail — Senior Siebel Developer</p>
+  </footer>
+  <script src="ui.js"></script>
+</body>
+</html>
